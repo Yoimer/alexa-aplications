@@ -122,7 +122,7 @@ def get_temperature():
      
 	print "next line is temperature"
     
-	temperature_msg = "Temperature value is: " + data.content + " Celsius degrees"
+	temperature_msg = "The temperature value that you requested is: " + data.content + " Celsius"
 
     #return statement(data.content)
 	return statement(temperature_msg)
@@ -140,7 +140,7 @@ def get_humidity():
      
 	print "next line is humidity"
     
-	humidity_msg = "Humidity value is: " + data.content + " Percentage"
+	humidity_msg = "The humidity value that you requested is: " + data.content + " Percentage"
 
     #return statement(data.content)
 	return statement(humidity_msg)
