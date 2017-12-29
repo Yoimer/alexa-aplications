@@ -1,0 +1,16 @@
+{
+  "intents": [
+    {
+      "intent": "OnIntent"
+    },
+    {
+      "intent": "OffIntent"
+    },
+    {
+      "intent": "TemperatureIntent"
+    },
+    {
+      "intent": "HumidityIntent"
+    }
+  ]
+}
