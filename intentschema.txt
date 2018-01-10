@@ -11,6 +11,9 @@
     },
     {
       "intent": "HumidityIntent"
+    },
+    {
+      "intent": "FullStatusIntent"
     }
   ]
 }
