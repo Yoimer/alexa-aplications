@@ -13,16 +13,23 @@ import json
 
 import requests
 
-######################################
-
-
 app = Flask(__name__)
 
 ask = Ask(app, "/")
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
-# voice command is Alexa ask longview
+
+######################################
+# Skill name: longview
+# Invocation Name : longview system
+
+
+##########launch skill##########
+# voice commands are:
+#Alexa, start longview system
+#Alexa, open longview system
+
 # launch skill
 @ask.launch
 # read welcome message from template.yaml file
@@ -32,7 +39,12 @@ def launch_app():
 
     return statement(welcome_msg)
 
-# voice command is Alexa tell longview on
+
+##########turn on device##########
+# voice commands are:
+#Alexa, tell longview system turn on
+#Alexa, ask longview system to turn on
+
 # turn system on
 @ask.intent("OnIntent")
 
@@ -41,7 +53,8 @@ def turn_on():
     sess = requests.Session()
 
     # read actual(lastest) value on db
-    url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
+    #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
+    url = 'https://phpcourse.000webhostapp.com/alexa.php?'
      
     data = sess.get(url)
      
@@ -61,7 +74,8 @@ def turn_on():
         sess = requests.Session()
 
         # sent ON to Nodemcu by sending 7 to db on castillolk
-        url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=7'
+        #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=7'
+        url = 'https://phpcourse.000webhostapp.com/alexa.php?value=7'
 
         data = sess.get(url)
 
@@ -75,7 +89,12 @@ def turn_on():
 
         return statement(turn_on_msg)
 
-# voice command is Alexa tell longview off
+
+##########turn off device##########
+# voice commands are:
+#Alexa, tell longview system to turn off
+#Alexa, ask longview system to turn off
+
 # turn system off
 @ask.intent("OffIntent")
 
@@ -84,7 +103,8 @@ def turn_off():
     sess = requests.Session()
 
     # read actual(lastest) value on db
-    url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
+    #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
+    url = 'https://phpcourse.000webhostapp.com/alexa.php?'
      
     data = sess.get(url)
      
@@ -104,7 +124,8 @@ def turn_off():
         sess = requests.Session()
 
         # sent OFF to Nodemcu by sending 8 to db on castillolk
-        url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=8'
+        #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=8'
+        url = 'https://phpcourse.000webhostapp.com/alexa.php?value=8'
      
         data = sess.get(url)
 
@@ -118,7 +139,12 @@ def turn_off():
      
         return statement(turn_on_msg)
 
-# voice command is Alexa ask longview temperature
+
+##########ask for temperature##########
+# voice commands are:
+#Alexa, ask longview system for temperature
+#Alexa, give me temperature from longview system
+
 # check temperature
 @ask.intent("TemperatureIntent")
 
@@ -143,7 +169,13 @@ def get_temperature():
     #return statement(data.content)
     return statement(temperature_msg)
 
-# voice command is Alexa tell ask longview humidity
+
+
+##########ask for humidity##########
+# voice commands are:
+#Alexa, ask longview system for humidity
+#Alexa, give me humidity from longview system
+
 # check humidity
 @ask.intent("HumidityIntent")
 
@@ -168,7 +200,12 @@ def get_humidity():
     #return statement(data.content)
     return statement(humidity_msg)
 
-# voice command is Alexa ask longview full status
+
+##########ask for full process variable status##########
+# voice commands are:
+#Alexa, ask longview system for full status
+#Alexa, give me full status from longview system
+
 # check any process variable on system
 @ask.intent("FullStatusIntent")
 
