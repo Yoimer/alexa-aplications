@@ -4,3 +4,4 @@ TemperatureIntent temperature
 HumidityIntent humidity
 FullStatusIntent full status
 FullStatusIntent complete status
+StopIntent stop

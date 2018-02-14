@@ -37,8 +37,18 @@ def launch_app():
 
     welcome_msg = render_template('welcome')
 
-    return statement(welcome_msg)
+    #return statement(welcome_msg)
+    return question(welcome_msg)
 
+
+##########stop skill##########
+# voice commands are:
+#Alexa, stop
+
+# stop skill
+@ask.intent("StopIntent")
+def stop():
+    return statement("Stopping the skill, thanks for using")
 
 ##########turn on device##########
 # voice commands are:
@@ -63,7 +73,7 @@ def turn_on():
     # check whether system is ON already
     if 'ON' in data.content:
 
-        turn_on_msg = "System is already turned on. Not action taken."
+        turn_on_msg = "Relay is already turned on. Not action taken."
 
         print(turn_on_msg)
 
@@ -83,7 +93,7 @@ def turn_on():
 
         print "next line is the statement"
 
-        turn_on_msg = "Turning system ON... It might take a few seconds, please wait."
+        turn_on_msg = "Turning Relay ON... It might take a few seconds, please wait."
 
         print(turn_on_msg)
 
@@ -113,7 +123,7 @@ def turn_off():
     # check whether system is OFF already
     if 'OFF' in data.content:
 
-        turn_off_msg = "System is already turned off. Not action taken."
+        turn_off_msg = "Relay is already turned off. Not action taken."
 
         print(turn_off_msg)
 
@@ -133,7 +143,7 @@ def turn_off():
      
         print "next line is the statement"
 
-        turn_on_msg = "Turning system OFF... It might take a few seconds, please wait."
+        turn_on_msg = "Turning Relay OFF... It might take a few seconds, please wait."
 
         print(turn_on_msg)
      
