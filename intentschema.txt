@@ -1,10 +1,10 @@
 {
   "intents": [
     {
-      "intent": "OnIntent"
+      "intent": "ActivateIntent"
     },
     {
-      "intent": "OffIntent"
+      "intent": "DeactivateIntent"
     },
     {
       "intent": "TemperatureIntent"
@@ -17,6 +17,9 @@
     },
     {
       "intent": "StopIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
     }
   ]
 }

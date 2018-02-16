@@ -1,7 +1,7 @@
 import logging
 
-from random import randint
-
+import random
+#from random import randint
 from flask import Flask, render_template
 
 from flask_ask import Ask, statement, question, session
@@ -50,13 +50,13 @@ def launch_app():
 def stop():
     return statement("Stopping the skill, thanks for using")
 
-##########turn on device##########
+##########activate relay##########
 # voice commands are:
-#Alexa, tell longview system turn on
-#Alexa, ask longview system to turn on
+#Alexa, tell longview system to activate relay
+#Alexa, ask longview system to activate relay
 
 # turn system on
-@ask.intent("OnIntent")
+@ask.intent("ActivateIntent")
 
 def turn_on():
 
@@ -73,7 +73,7 @@ def turn_on():
     # check whether system is ON already
     if 'ON' in data.content:
 
-        turn_on_msg = "Relay is already turned on. Not action taken."
+        turn_on_msg = "Relay is already activated. Not action taken."
 
         print(turn_on_msg)
 
@@ -100,13 +100,13 @@ def turn_on():
         return statement(turn_on_msg)
 
 
-##########turn off device##########
+##########deactivate relay##########
 # voice commands are:
-#Alexa, tell longview system to turn off
-#Alexa, ask longview system to turn off
+#Alexa, tell longview system to deactivate relay
+#Alexa, ask longview system to deactivate relay
 
 # turn system off
-@ask.intent("OffIntent")
+@ask.intent("DeactivateIntent")
 
 def turn_off():
 
@@ -123,7 +123,7 @@ def turn_off():
     # check whether system is OFF already
     if 'OFF' in data.content:
 
-        turn_off_msg = "Relay is already turned off. Not action taken."
+        turn_off_msg = "Relay is already deactivated. Not action taken."
 
         print(turn_off_msg)
 
@@ -143,7 +143,7 @@ def turn_off():
      
         print "next line is the statement"
 
-        turn_on_msg = "Turning Relay OFF... It might take a few seconds, please wait."
+        turn_on_msg = "Deactivating relay... It might take a few seconds, please wait."
 
         print(turn_on_msg)
      
@@ -242,6 +242,35 @@ def get_full_status():
 
     full_status_msg = "The variable values that you requested are: " + data.content
     return statement(full_status_msg)
+
+
+##########ask for help##########
+# voice commands are:
+#help (when welcoming)
+#Alexa ask longview system for help (anytime)
+
+# ask for help when welcoming or anytime
+@ask.intent("AMAZON.HelpIntent")
+def help():
+
+    help_list = [ 
+                    "Alexa, tell. longview system activate relay... in order to activate the connected relay"
+                    " in the E S P 8 2 6 6 device...",
+
+                    "Alexa, tell.. longview system deactivate relay... to deactivate relay"
+                    " in the E S P 8 2 6 6 device...",
+
+                    "To ask for temperature say... alexa give me temperature from longview system...",
+
+                    "To ask for humidity say... alexa give me humidity from longview system...",
+
+                    "To ask for the whole variable process say... alexa give me full status from longview system..."
+                ]
+
+    # say a radom msg from help_list
+    help_msg = "I will prompt a random request..." + help_list[random.randint(0,(len(help_list) - 1))]
+    return statement(help_msg)
+
 
 if __name__ == '__main__':
 

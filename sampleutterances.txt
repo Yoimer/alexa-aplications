@@ -1,5 +1,5 @@
-OnIntent on
-OffIntent off
+ActivateIntent activate
+DeactivateIntent deactivate
 TemperatureIntent temperature
 HumidityIntent humidity
 FullStatusIntent full status
