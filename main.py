@@ -269,8 +269,10 @@ def help():
 
     # say a radom msg from help_list
     help_msg = "I will prompt a random request..." + help_list[random.randint(0,(len(help_list) - 1))]
-    return statement(help_msg)
-
+    reprompt_msg = "...Please say the command I just did... or... say.. help to prompt another random request..."
+    reprompt_msg += "or say stop to close the skill"
+    #return statement(help_msg)
+    return question(help_msg).reprompt(reprompt_msg)
 
 if __name__ == '__main__':
 
