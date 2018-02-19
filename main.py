@@ -27,8 +27,7 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 ##########launch skill##########
 # voice commands are:
-#Alexa, start longview system
-#Alexa, open longview system
+#Alexa, launch longview system
 
 # launch skill
 @ask.launch
@@ -43,112 +42,14 @@ def launch_app():
 
 ##########stop skill##########
 # voice commands are:
+# stop
 #Alexa, stop
 
 # stop skill
-@ask.intent("StopIntent")
+#@ask.intent("StopIntent")
+@ask.intent("AMAZON.StopIntent")
 def stop():
     return statement("Stopping the skill, thanks for using")
-
-##########activate relay##########
-# voice commands are:
-#Alexa, tell longview system to activate relay
-#Alexa, ask longview system to activate relay
-
-# turn system on
-@ask.intent("ActivateIntent")
-
-def turn_on():
-
-    sess = requests.Session()
-
-    # read actual(lastest) value on db
-    #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
-    url = 'https://phpcourse.000webhostapp.com/alexa.php?'
-     
-    data = sess.get(url)
-     
-    print data.content
-
-    # check whether system is ON already
-    if 'ON' in data.content:
-
-        turn_on_msg = "Relay is already activated. Not action taken."
-
-        print(turn_on_msg)
-
-        return statement(turn_on_msg)
-
-    # save ON in db to be read by nodemcu
-    else:
-        sess = requests.Session()
-
-        # sent ON to Nodemcu by sending 7 to db on castillolk
-        #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=7'
-        url = 'https://phpcourse.000webhostapp.com/alexa.php?value=7'
-
-        data = sess.get(url)
-
-        print data.content
-
-        print "next line is the statement"
-
-        turn_on_msg = "Turning Relay ON... It might take a few seconds, please wait."
-
-        print(turn_on_msg)
-
-        return statement(turn_on_msg)
-
-
-##########deactivate relay##########
-# voice commands are:
-#Alexa, tell longview system to deactivate relay
-#Alexa, ask longview system to deactivate relay
-
-# turn system off
-@ask.intent("DeactivateIntent")
-
-def turn_off():
-
-    sess = requests.Session()
-
-    # read actual(lastest) value on db
-    #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?'
-    url = 'https://phpcourse.000webhostapp.com/alexa.php?'
-     
-    data = sess.get(url)
-     
-    print data.content
-
-    # check whether system is OFF already
-    if 'OFF' in data.content:
-
-        turn_off_msg = "Relay is already deactivated. Not action taken."
-
-        print(turn_off_msg)
-
-        return statement(turn_off_msg)
-
-    # save OFF in db to be read by nodemcu
-    else:
-        sess = requests.Session()
-
-        # sent OFF to Nodemcu by sending 8 to db on castillolk
-        #url = 'http://castillolk.com.ve/proyectos/sms/alexa.php?sw=8'
-        url = 'https://phpcourse.000webhostapp.com/alexa.php?value=8'
-     
-        data = sess.get(url)
-
-        print data.content
-     
-        print "next line is the statement"
-
-        turn_on_msg = "Deactivating relay... It might take a few seconds, please wait."
-
-        print(turn_on_msg)
-     
-        return statement(turn_on_msg)
-
 
 ##########ask for temperature##########
 # voice commands are:
@@ -253,24 +154,19 @@ def get_full_status():
 @ask.intent("AMAZON.HelpIntent")
 def help():
 
-    help_list = [ 
-                    "Alexa, tell. longview system activate relay... in order to activate the connected relay"
-                    " in the E S P 8 2 6 6 device...",
+    help_list = [
 
-                    "Alexa, tell.. longview system deactivate relay... to deactivate relay"
-                    " in the E S P 8 2 6 6 device...",
+                    "temperature say... alexa give me temperature from longview system...",
 
-                    "To ask for temperature say... alexa give me temperature from longview system...",
+                    "humidity say... alexa give me humidity from longview system...",
 
-                    "To ask for humidity say... alexa give me humidity from longview system...",
-
-                    "To ask for the whole variable process say... alexa give me full status from longview system..."
+                    "the whole variable process say... alexa give me full status from longview system..."
                 ]
 
     # say a radom msg from help_list
-    help_msg = "I will prompt a random request..." + help_list[random.randint(0,(len(help_list) - 1))]
-    reprompt_msg = "...Please say the command I just did... or... say.. help to prompt another random request..."
-    reprompt_msg += "or say stop to close the skill"
+    help_msg = "To ask for " + help_list[random.randint(0,(len(help_list) - 1))]
+    reprompt_msg = "...Please" + help_msg
+    reprompt_msg += "or. say... stop to close the skill"
     #return statement(help_msg)
     return question(help_msg).reprompt(reprompt_msg)
 

@@ -1,7 +1,3 @@
-ActivateIntent activate
-DeactivateIntent deactivate
-TemperatureIntent temperature
-HumidityIntent humidity
-FullStatusIntent full status
-FullStatusIntent complete status
-StopIntent stop
+TemperatureIntent give me temperature from longview system
+HumidityIntent give me humidity from longview system
+FullStatusIntent give me full status from longview system
